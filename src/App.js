@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Form from './components/Forms'
 
 class App extends Component {
+  state = {
+    fields : {}
+  }
+  formData = values => {
+    console.log("Form Details", values);
+    this.setState({
+      fields : {
+        ...this.state.fields,
+        ...values
+      }
+    })
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Form liveChange={this.formData}/>
+        <p>{JSON.stringify(this.state.fields,null,2)}</p>
       </div>
     );
   }
